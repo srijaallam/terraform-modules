@@ -111,3 +111,15 @@ variable "use_fortiweb_byol" {
 variable "fwb_admin_password" {
   description = "FortiWeb Admin Password"
 }
+variable "fwb_system_config_1" {
+  description = "Fortiweb Config file"
+}
+variable "fwb_system_config_2" {
+  description = "Fortiweb Config file"
+}
+variable "access_key" {
+   description = "aws access key"
+}                 
+variable "secret_key" {
+   description = "secret_key"
+}               

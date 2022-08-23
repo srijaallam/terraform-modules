@@ -4,4 +4,5 @@ fwb_json_start {
 "bucket": "${fwb_s3_bucket}"
 "region": "${fwb_aws_region}"
 "license": "${fwb_license_file}"
+"config" : "${fwb_system_conf_file}"
 }

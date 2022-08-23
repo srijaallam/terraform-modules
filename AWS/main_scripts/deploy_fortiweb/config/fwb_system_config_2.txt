@@ -1,0 +1,9 @@
+config system ha
+    set mode active-active-high-volume
+    set group-name activeactive
+    set group-id 1
+    set priority 5
+    set tunnel-local ${private2_ip_address}
+    set tunnel-peer ${private1_ip_address}
+    set monitor port2
+end

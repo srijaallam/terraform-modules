@@ -3,7 +3,7 @@
 # Variable to be defined for user environment
 #
 aws_region                   = "us-west-2"
-customer_prefix              = "mdw-fwb-demo"
+customer_prefix              = "sallam-fwb-demo"
 environment                  = "dev"
 vpc_name_security            = "web_security"
 availability_zone_1          = "us-west-2a"
@@ -28,8 +28,10 @@ private2_description        = "private2-az2"
 
 fwb_byol_license_1           = "./licenses/fwb-license-1.lic"
 fwb_byol_license_2           = "./licenses/fwb-license-1.lic"
-keypair                      = "mdw-key-oregon"
-fwb_s3_bucket                = "mdw-fwb-demo"
+keypair                      = "sallam-key-oregon"
+fwb_s3_bucket                = "sallam-fwb-demo"
+fwb_system_config_1          = "./config/fwb_system_config_1.txt"
+fwb_system_config_2          = "./config/fwb_system_config_2.txt"
 
 enable_public_ips_1          = true
 enable_public_ips_2          = true
@@ -41,11 +43,10 @@ fortiweb_instance_type       = "c5.large"
 
 fortiweb_1_instance_name     = "fortiweb_one"
 fortiweb_2_instance_name     = "fortiweb_two"
-fortiweb_os_version          = "6.3.7"
+fortiweb_os_version          = "7.0.2"
 acl                          = "private"
 fwb_admin_password           = "Texas4me!"
-
-
-
+access_key                   = ""
+secret_key                   = ""
 
 

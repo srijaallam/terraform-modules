@@ -8,10 +8,12 @@ data "template_file" "fwb_userdata_byol_1" {
 
   vars = {
     fwb_byol_license      = file("${path.module}/${var.fwb_byol_license_1}")
+    fwb_system_conf       = file("${path.module}/${var.fwb_system_config_1}")
     fwb_admin_password    = var.fwb_admin_password
     fwb_s3_bucket         = var.fwb_s3_bucket
     fwb_aws_region        = var.aws_region
     fwb_license_file      = var.fwb_byol_license_1
+    fwb_system_conf_file     = var.fwb_system_config_1
   }
 }
 
@@ -20,10 +22,12 @@ data "template_file" "fwb_userdata_byol_2" {
 
   vars = {
     fwb_byol_license      = file("${path.module}/${var.fwb_byol_license_2}")
+    fwb_system_conf       = file("${path.module}/${var.fwb_system_config_2}")
     fwb_admin_password    = var.fwb_admin_password
     fwb_s3_bucket         = var.fwb_s3_bucket
     fwb_aws_region        = var.aws_region
     fwb_license_file      = var.fwb_byol_license_2
+    fwb_system_conf_file    = var.fwb_system_config_2
   }
 }
 /*
@@ -166,6 +170,8 @@ module "fortiweb_1" {
   instance_type               = var.fortiweb_instance_type
   public_subnet_id            = module.base-vpc.public1_subnet_id
   public_ip_address           = var.public1_ip_address
+  private_subnet_id           = module.base-vpc.private1_subnet_id
+  private_ip_address          = var.private1_ip_address
   aws_ami                     = data.aws_ami.fortiweb_byol.id
   enable_public_ips           = var.enable_public_ips_1
   keypair                     = var.keypair
@@ -186,6 +192,8 @@ module "fortiweb_2" {
   instance_type               = var.fortiweb_instance_type
   public_subnet_id            = module.base-vpc.public2_subnet_id
   public_ip_address           = var.public2_ip_address
+  private_subnet_id           = module.base-vpc.private2_subnet_id
+  private_ip_address         = var.private2_ip_address
   aws_ami                     = data.aws_ami.fortiweb_byol.id
   enable_public_ips           = var.enable_public_ips_2
   keypair                     = var.keypair
@@ -194,3 +202,15 @@ module "fortiweb_2" {
   userdata_rendered           = data.template_file.fwb_userdata_byol_1.rendered
 }
 
+module "nlb"{
+source                            = "../../modules/nlb"
+
+aws_region                        =  var.aws_region
+vpc_id                            = module.base-vpc.vpc_id
+subnet1_id                        = module.base-vpc.public1_subnet_id
+subnet2_id                        = module.base-vpc.public2_subnet_id
+customer_prefix                   = "${var.customer_prefix}-fortiweb"
+secret_key                        = var.secret_key
+access_key                        = var.access_key
+environment                       = var.environment
+}
